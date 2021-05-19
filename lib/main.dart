@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import 'models/transaction.dart';
-import 'widgets/transaction_list.dart';
-import './widgets/new_transaction.dart';
+import './models/transaction.dart';
 import './widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
@@ -40,8 +37,7 @@ class MyHomePage extends StatelessWidget {
             Card(
               child: Text('Chart'),
             ),
-            NewTransaction(),
-            TransactionList(),
+            UserTransaction(),
           ],
         ));
   }

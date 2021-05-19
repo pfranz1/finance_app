@@ -3,26 +3,10 @@ import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
-class TransactionList extends StatefulWidget {
-  @override
-  _TransactionListState createState() => _TransactionListState();
-}
+class TransactionList extends StatelessWidget {
+  final List<Transaction> _transactions;
 
-class _TransactionListState extends State<TransactionList> {
-  final List _transactions = <Transaction>[
-    Transaction(
-      id: "t1",
-      name: "New Shoes",
-      price: 10.50,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      name: "New Hat",
-      price: 100.00,
-      date: DateTime.now(),
-    ),
-  ];
+  TransactionList(this._transactions);
 
   @override
   Widget build(BuildContext context) {

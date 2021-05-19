@@ -4,6 +4,10 @@ class NewTransaction extends StatelessWidget {
   final nameController = TextEditingController();
   final priceController = TextEditingController();
 
+  final Function addController;
+
+  NewTransaction(this.addController);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,8 +27,8 @@ class NewTransaction extends StatelessWidget {
             SizedBox(
               child: RaisedButton(
                 onPressed: () {
-                  print(nameController.text);
-                  print(priceController.text);
+                  addController(
+                      nameController.text, double.parse(priceController.text));
                 },
                 child: Text('Add Transaction'),
               ),
