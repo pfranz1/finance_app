@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import 'models/transaction.dart';
 import 'widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
+import './widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,77 +40,8 @@ class MyHomePage extends StatelessWidget {
             Card(
               child: Text('Chart'),
             ),
-            Card(
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Name'),
-                      controller: nameController,
-                    ),
-                    TextField(
-                      controller: priceController,
-                      decoration: InputDecoration(labelText: 'Price'),
-                    ),
-                    SizedBox(
-                      child: RaisedButton(
-                        onPressed: () {
-                          print(nameController.text);
-                          print(priceController.text);
-                        },
-                        child: Text('Add Transaction'),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            ...transactions.map((tx) {
-              return Card(
-                elevation: 5,
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.purple,
-                          width: 2.0,
-                        ),
-                      ),
-                      padding: EdgeInsets.all(6.0),
-                      child: Text(
-                        '\$${tx.price}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.green[700]),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          tx.name,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          DateFormat.yMMMd().format(tx.date),
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }).toList()
+            NewTransaction(),
+            TransactionList(),
           ],
         ));
   }
