@@ -9,6 +9,7 @@ class NewTransaction extends StatelessWidget {
   NewTransaction(this.addController);
 
   void _submitCalled() {
+    print(priceController.text);
     addController(nameController.text, double.parse(priceController.text));
   }
 
