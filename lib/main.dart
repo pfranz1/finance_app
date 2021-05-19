@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import './models/transaction.dart';
 import './widgets/new_transaction.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-          primarySwatch: Colors.green, accentColor: Colors.lightBlue[200]),
+        primarySwatch: Colors.green,
+        accentColor: Colors.lightBlue[200],
+        fontFamily: 'QuickSand',
+      ),
       home: MyHomePage(),
     );
   }
@@ -34,19 +38,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final priceController = TextEditingController();
 
+  List<Transaction> get _recentTransactions {
+    return transactions.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   final List _transactions = <Transaction>[
-    Transaction(
-      id: "t1",
-      name: "New Shoes",
-      price: 10.50,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      name: "New Hat",
-      price: 100.00,
-      date: DateTime.now(),
-    ),
+    //   Transaction(
+    //     id: "t1",
+    //     name: "New Shoes",
+    //     price: 10.50,
+    //     date: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     id: "t2",
+    //     name: "New Hat",
+    //     price: 100.00,
+    //     date: DateTime.now(),
+    //   ),
   ];
 
   void _addNewTransaction(String txName, double txAmount) {
@@ -89,9 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Card(
-              child: Text('Chart'),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
