@@ -8,6 +8,10 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.addController);
 
+  void _submitCalled() {
+    addController(nameController.text, double.parse(priceController.text));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,17 +23,17 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Name'),
               controller: nameController,
+              onSubmitted: (_) => _submitCalled(),
             ),
             TextField(
               controller: priceController,
               decoration: InputDecoration(labelText: 'Price'),
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => _submitCalled(),
             ),
             SizedBox(
               child: RaisedButton(
-                onPressed: () {
-                  addController(
-                      nameController.text, double.parse(priceController.text));
-                },
+                onPressed: _submitCalled,
                 child: Text('Add Transaction'),
               ),
             )
