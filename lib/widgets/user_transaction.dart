@@ -40,12 +40,15 @@ class _UserTransactionState extends State<UserTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        NewTransaction(_addNewTransaction),
-        TransactionList(_transactions),
-      ],
+    return Container(
+      height: 579,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          NewTransaction(_addNewTransaction),
+          TransactionList(_transactions),
+        ],
+      ),
     );
   }
 }
