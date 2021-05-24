@@ -11,7 +11,6 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final nameController = TextEditingController();
-
   final priceController = TextEditingController();
 
   void _submitCalled() {

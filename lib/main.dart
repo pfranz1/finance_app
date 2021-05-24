@@ -28,36 +28,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List transactions = <Transaction>[
-    Transaction(
-        id: "t1", name: "New Shoes", price: 10.50, date: DateTime.now()),
-    Transaction(id: "t2", name: "New Hat", price: 100.00, date: DateTime.now()),
+  final List _transactions = <Transaction>[
+    // Transaction(id: "t1", name: "New Shoes", price: 10.50, date: DateTime.now()),
+    // Transaction(id: "t2", name: "New Hat", price: 100.00, date: DateTime.now())
   ];
 
-  final nameController = TextEditingController();
-
-  final priceController = TextEditingController();
-
   List<Transaction> get _recentTransactions {
-    return transactions.where((element) {
+    return _transactions.where((element) {
       return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
-
-  final List _transactions = <Transaction>[
-    //   Transaction(
-    //     id: "t1",
-    //     name: "New Shoes",
-    //     price: 10.50,
-    //     date: DateTime.now(),
-    //   ),
-    //   Transaction(
-    //     id: "t2",
-    //     name: "New Hat",
-    //     price: 100.00,
-    //     date: DateTime.now(),
-    //   ),
-  ];
 
   void _addNewTransaction(String txName, double txAmount) {
     final newTx = new Transaction(
