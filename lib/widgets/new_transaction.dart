@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addController;
@@ -13,10 +14,26 @@ class _NewTransactionState extends State<NewTransaction> {
   final nameController = TextEditingController();
   final priceController = TextEditingController();
 
+  DateTime _selectedDate;
+
   void _submitCalled() {
-    print(priceController.text);
     widget.addController(
-        nameController.text, double.parse(priceController.text));
+        nameController.text, double.parse(priceController.text), _selectedDate);
+  }
+
+  void _displayDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(DateTime.now().year),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      pickedDate != null
+          ? setState(() {
+              _selectedDate = pickedDate;
+            })
+          : null;
+    });
   }
 
   @override
@@ -41,6 +58,25 @@ class _NewTransactionState extends State<NewTransaction> {
                   decoration: InputDecoration(labelText: 'Price'),
                   keyboardType: TextInputType.number,
                   onSubmitted: (_) => _submitCalled(),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Text(_selectedDate == null
+                        ? 'No Date Chosen'
+                        : 'Picked Date: ${DateFormat.yMd().format(_selectedDate).toString()}'),
+                    FlatButton(
+                      onPressed: _displayDatePicker,
+                      child: Text(
+                        'Select Date',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   child: RaisedButton(
