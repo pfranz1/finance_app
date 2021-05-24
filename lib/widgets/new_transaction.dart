@@ -21,30 +21,36 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Name'),
-              controller: nameController,
-              onSubmitted: (_) => _submitCalled(),
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: 350,
+        width: double.infinity,
+        child: Card(
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextField(
+                  decoration: InputDecoration(labelText: 'Name'),
+                  controller: nameController,
+                  onSubmitted: (_) => _submitCalled(),
+                ),
+                TextField(
+                  controller: priceController,
+                  decoration: InputDecoration(labelText: 'Price'),
+                  keyboardType: TextInputType.number,
+                  onSubmitted: (_) => _submitCalled(),
+                ),
+                SizedBox(
+                  child: RaisedButton(
+                    onPressed: _submitCalled,
+                    child: Text('Add Transaction'),
+                  ),
+                )
+              ],
             ),
-            TextField(
-              controller: priceController,
-              decoration: InputDecoration(labelText: 'Price'),
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitCalled(),
-            ),
-            SizedBox(
-              child: RaisedButton(
-                onPressed: _submitCalled,
-                child: Text('Add Transaction'),
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
